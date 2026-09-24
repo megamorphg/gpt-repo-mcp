@@ -21,6 +21,21 @@ export const RepoSummarySchema = z.object({
   root: z.string()
 });
 
+export const RepoRuntimeInfoSchema = z.object({
+  implementation: z.literal("gpt-repo-mcp"),
+  version: z.string().min(1),
+  platform: z.string().min(1),
+  capability_schema_version: z.number().int().positive(),
+  features: z.object({
+    literal_exact_replacements: z.boolean(),
+    newline_metadata: z.boolean(),
+    structured_write_failure_diagnostics: z.boolean(),
+    transient_windows_atomic_rename_retry: z.boolean(),
+    windows_validation_command_shim: z.boolean()
+  })
+});
+
 export const RepoListResultSchema = z.object({
-  repos: z.array(RepoSummarySchema)
+  repos: z.array(RepoSummarySchema),
+  runtime: RepoRuntimeInfoSchema
 });

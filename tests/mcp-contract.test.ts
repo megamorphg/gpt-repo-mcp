@@ -1537,7 +1537,20 @@ describe("MCP contract", () => {
             display_name: "Fixture Repo",
             root: expect.any(String)
           })
-        ]
+        ],
+        runtime: {
+          implementation: "gpt-repo-mcp",
+          version: expect.any(String),
+          platform: expect.any(String),
+          capability_schema_version: 1,
+          features: {
+            literal_exact_replacements: true,
+            newline_metadata: true,
+            structured_write_failure_diagnostics: true,
+            transient_windows_atomic_rename_retry: true,
+            windows_validation_command_shim: true
+          }
+        }
       });
       expect(result.content).toEqual([{ type: "text", text: "1 approved repositories available." }]);
     } finally {

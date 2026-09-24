@@ -1049,6 +1049,8 @@ describe("tool catalog contracts", () => {
         path: "README.md",
         size_bytes: 10,
         sha256: "abc",
+        newline_style: "lf",
+        has_final_newline: true,
         total_lines: 1,
         start_line: 1,
         end_line: 1,
@@ -1169,6 +1171,7 @@ describe("tool catalog contracts", () => {
           "name": "repo_list_roots",
           "outputKeys": [
             "repos",
+            "runtime",
           ],
           "title": "List approved repositories",
         },
@@ -1323,7 +1326,9 @@ describe("tool catalog contracts", () => {
           "name": "repo_fetch_file",
           "outputKeys": [
             "end_line",
+            "has_final_newline",
             "language",
+            "newline_style",
             "path",
             "sha256",
             "size_bytes",

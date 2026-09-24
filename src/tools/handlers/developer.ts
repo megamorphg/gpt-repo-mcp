@@ -23,6 +23,7 @@ import { WorkSessionService } from "../../services/work-session-service.js";
 import { WriteChangesService } from "../../services/write-changes-service.js";
 import { WritePolicy } from "../../services/write-policy.js";
 import { createSuccessEnvelope } from "../../runtime/result-envelope.js";
+import { GPT_REPO_RUNTIME_INFO } from "../../runtime/runtime-info.js";
 import { audit } from "../../runtime/telemetry.js";
 import type { ChangePlanInput } from "../../contracts/change-plan.contract.js";
 import type { ContextMapInput } from "../../contracts/context-map.contract.js";
@@ -65,7 +66,7 @@ type GitDiffInput = RepoInput & {
 
 export const listRootsHandler: ToolHandler = async (_input, context) => {
   const repos = context.registry.list();
-  return createSuccessEnvelope({ repos }, `${repos.length} approved repositories available.`);
+  return createSuccessEnvelope({ repos, runtime: GPT_REPO_RUNTIME_INFO }, `${repos.length} approved repositories available.`);
 };
 
 export const policyExplainHandler: ToolHandler = async (input, context) => safeTool<PolicyExplainInput>("repo_policy_explain", input, async (args) => {
